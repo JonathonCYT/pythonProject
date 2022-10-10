@@ -1,6 +1,6 @@
 from fastapi import HTTPException
 from fpdf import FPDF
-import modelUser
+import modelUsers
 
 
 class PDF(FPDF):
@@ -17,14 +17,14 @@ class PDF(FPDF):
         self.multi_cell(0, 10, text)
 
 
-async def createDoc(doc: modelUser.userInfo):
-    return await modelUser.userInfo.objects.create()
+async def createDoc(doc: modelUsers.userInfo):
+    return await modelUsers.userInfo.objects.create()
 
 
 async def createPdf(pk: int) -> str:
     try:
-        _doc = await modelUser.userInfo.objects.get(id=pk)
-    except modelUser.userInfo.exceptions.NoMatch:
+        _doc = await modelUsers.userInfo.objects.get(id=pk)
+    except modelUsers.userInfo.exceptions.NoMatch:
         raise HTTPException(status_code=404, detail="Not found")
 
     path = f"static/{_doc.title}.pdf"

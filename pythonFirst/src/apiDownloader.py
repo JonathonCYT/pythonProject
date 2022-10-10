@@ -1,13 +1,13 @@
 from fastapi import APIRouter
 from starlette.responses import FileResponse
-import modelUser
+import modelUsers
 import pdfService
 
 pdf = APIRouter()
 
 
-@pdf.post('/', response_model=modelUser.userOutput)
-async def docCreate(doc: modelUser.userInfo):
+@pdf.post('/', response_model=modelUsers.userOutput)
+async def docCreate(doc: modelUsers.userInfo):
     return await pdfService.createDoc(doc)
 
 
